@@ -1,13 +1,14 @@
 import React from "react";
+import Selector from './Selector';
 
 class Canvas extends React.Component {
   constructor() {
     super();
 
     this.state = {
+      isDown: false,
       startPos: null,
       currPos: {},
-      isDown: false,
     };
 
     this.toggleClick = this.toggleClick.bind(this);
@@ -27,24 +28,21 @@ class Canvas extends React.Component {
   }
 
   toggleClick(e) {
+    // FIX IF MOUSE IS ALREADY CLICKED
+
     const { isDown } = this.state;
 
     if (!isDown) {
       this.setState({ 
         isDown: !isDown,
         startPos: {
-          x: e.x,
-          y: e.y,
+          sx: e.x,
+          sy: e.y,
         } 
-      }, () => {
-        // console.log(this.state)
       });
     } else {
       this.setState({ 
         isDown: !isDown,
-        startPos: null,
-      }, () => {
-        // console.log(this.state)
       });
     }
   }
@@ -53,27 +51,27 @@ class Canvas extends React.Component {
     const { isDown } = this.state;
 
     if (isDown) {
-      this.setState({ currPos: { x: e.x, y: e.y } }, () => {
-        // console.log(this.state)
-      });
+      this.setState({ 
+        currPos: { 
+          cx: e.x, 
+          cy: e.y,
+        }
+      })
     }
   }
 
   render() {
     const { isDown } = this.state;
 
-    let selector;
-
-    if (isDown) {
-      selector = (
-        <div className="selector" >
-        </div>
-      )
+    const canvasStyle = {
+      height: '750px',
+      width: '750px',
+      border: '2px solid grey',
     }
 
     return (
-      <div className="canvas">
-
+      <div className="canvas" style={canvasStyle}>
+        {isDown && <Selector {...this.state} />} 
       </div>
     )
   }
