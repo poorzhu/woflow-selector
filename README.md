@@ -6,3 +6,5 @@ The template project for [nano-react-app](https://github.com/adrianmcli/nano-rea
 - `npm run build` — This will output a production build in the `dist` directory.
 
 # Demo
+
+![](woflow_selector_demo.gif)
