@@ -7,8 +7,8 @@ class Canvas extends React.Component {
     super();
 
     this.state = {
-      isDown: null,
-      startPos: null,
+      isDown: false,
+      startPos: {},
       currPos: {},
     };
 
